@@ -43,7 +43,7 @@ export const QUESTIONS = [
     category: 'VIDEO PUZZLE',
     difficulty: 'MEDIUM',
     revealedLetter: 'CH',
-    question: '⚠ CORRUPTED TRANSMISSION ⚠\n\nA secure code is being transmitted.\n\nObserve carefully. The system log mentions:\n\n"Applying +1 offset..."\n\nReconstruct the original code.',
+    question: '⚠ CORRUPTED TRANSMISSION ⚠\n\nA secure code is being transmitted through a compromised channel.\n\nSystem log:\n"Applying offset..."\n\n⚠ Note:\n- Numbers are shifted forward (+1)\n- Letters are shifted backward (-1)\n\nObserve the video carefully and reconstruct the original code.',
     mediaType: 'video',
     mediaUrl: videoAsset,
     answer: 'x9k7',

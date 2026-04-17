@@ -1,0 +1,384 @@
+@import "tailwindcss";
+
+/* ── Cyberpunk Design Tokens ── */
+:root {
+  --neon-green: #00ff41;
+  --neon-red: #ff0033;
+  --neon-cyan: #00f5ff;
+  --neon-yellow: #ffff00;
+  --bg-dark: #000a05;
+  --bg-panel: #020f06;
+  --bg-glass: rgba(0, 255, 65, 0.04);
+  --border-green: rgba(0, 255, 65, 0.3);
+  --border-red: rgba(255, 0, 51, 0.4);
+  --text-dim: rgba(0, 255, 65, 0.5);
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-orb: 'Orbitron', sans-serif;
+  --font-vt: 'VT323', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--bg-dark);
+  color: var(--neon-green);
+  font-family: var(--font-mono);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 2px; }
+
+/* ── Scanlines overlay ── */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  animation: scanMove 10s linear infinite;
+}
+
+@keyframes scanMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+/* ── CRT flicker ── */
+.crt-flicker {
+  animation: crtFlicker 0.15s infinite;
+}
+
+@keyframes crtFlicker {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.97; }
+}
+
+/* ── Glitch text ── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.glitch::before {
+  color: var(--neon-red);
+  animation: glitch1 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-2px, 0);
+}
+
+.glitch::after {
+  color: var(--neon-cyan);
+  animation: glitch2 3s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  transform: translate(2px, 0);
+}
+
+@keyframes glitch1 {
+  0%, 90%, 100% { transform: translate(-2px, 0) skewX(0deg); opacity: 1; }
+  91%           { transform: translate(2px, -2px) skewX(-5deg); opacity: 0.9; }
+  92%           { transform: translate(-4px, 2px) skewX(5deg); opacity: 0.8; }
+  93%           { transform: translate(4px, -2px) skewX(-3deg); opacity: 1; }
+  94%           { transform: translate(-2px, 0) skewX(0deg); opacity: 0.9; }
+}
+
+@keyframes glitch2 {
+  0%, 90%, 100% { transform: translate(2px, 0) skewX(0deg); opacity: 1; }
+  91%           { transform: translate(-4px, 2px) skewX(3deg); opacity: 0.9; }
+  93%           { transform: translate(4px, -2px) skewX(-5deg); opacity: 0.8; }
+  95%           { transform: translate(2px, 0) skewX(0deg); opacity: 1; }
+}
+
+/* ── Neon glow ── */
+.neon-green { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green), 0 0 20px var(--neon-green); }
+.neon-red   { color: var(--neon-red);   text-shadow: 0 0 8px var(--neon-red),   0 0 20px var(--neon-red);   }
+.neon-cyan  { color: var(--neon-cyan);  text-shadow: 0 0 8px var(--neon-cyan),  0 0 20px var(--neon-cyan);  }
+
+/* ── Panel glass ── */
+.cyber-panel {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.05), inset 0 0 20px rgba(0, 255, 65, 0.02);
+  backdrop-filter: blur(4px);
+}
+
+.cyber-panel-red {
+  background: rgba(255, 0, 51, 0.04);
+  border: 1px solid var(--border-red);
+  box-shadow: 0 0 20px rgba(255, 0, 51, 0.08), inset 0 0 20px rgba(255, 0, 51, 0.02);
+}
+
+/* ── Input ── */
+.cyber-input {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-green);
+  color: var(--neon-green);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  caret-color: var(--neon-green);
+}
+
+.cyber-input:focus {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3), inset 0 0 6px rgba(0, 255, 65, 0.05);
+}
+
+.cyber-input::placeholder { color: var(--text-dim); }
+
+/* ── Button ── */
+.cyber-btn {
+  font-family: var(--font-orb);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.2s, box-shadow 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--neon-green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+  z-index: -1;
+}
+
+.cyber-btn:hover::before  { transform: scaleX(1); }
+.cyber-btn:hover          { color: #000; box-shadow: 0 0 24px rgba(0, 255, 65, 0.5); }
+.cyber-btn:disabled       { opacity: 0.3; cursor: not-allowed; }
+.cyber-btn:disabled:hover { color: var(--neon-green); box-shadow: none; }
+.cyber-btn:disabled:hover::before { transform: scaleX(0); }
+
+.cyber-btn-red {
+  border-color: var(--neon-red);
+  color: var(--neon-red);
+}
+
+.cyber-btn-red::before { background: var(--neon-red); }
+.cyber-btn-red:hover   { color: #000; box-shadow: 0 0 24px rgba(255, 0, 51, 0.5); }
+
+/* ── Letter box ── */
+.letter-box {
+  width: 2.5rem;
+  height: 3rem;
+  border: 1px solid var(--border-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-orb);
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.6);
+  clip-path: polygon(4px 0%, 100% 0%, calc(100%-4px) 100%, 0% 100%);
+  position: relative;
+}
+
+.letter-box.revealed {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.4), inset 0 0 8px rgba(0, 255, 65, 0.1);
+  animation: letterReveal 0.5s ease;
+}
+
+@keyframes letterReveal {
+  0%   { transform: scale(0) rotateY(180deg); filter: brightness(3); }
+  50%  { transform: scale(1.2) rotateY(0deg); filter: brightness(2); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* ── Terminal cursor ── */
+.cursor-blink::after {
+  content: '█';
+  animation: cursorBlink 1s step-end infinite;
+  color: var(--neon-green);
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Shake animation ── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+  20%, 40%, 60%, 80% { transform: translateX(6px); }
+}
+
+.shake { animation: shake 0.5s ease; }
+
+/* ── Progress bar ── */
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-green), #00ff99);
+  box-shadow: 0 0 10px var(--neon-green);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #fff;
+  box-shadow: 0 0 8px #fff;
+}
+
+/* ── Success/Error overlay text ── */
+.access-granted {
+  color: var(--neon-green);
+  font-family: var(--font-orb);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green), 0 0 80px var(--neon-green);
+  animation: pulseGlow 1s ease-in-out infinite alternate;
+}
+
+.access-denied {
+  color: var(--neon-red);
+  font-family: var(--font-orb);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px var(--neon-red), 0 0 40px var(--neon-red), 0 0 80px var(--neon-red);
+}
+
+@keyframes pulseGlow {
+  from { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); }
+  to   { text-shadow: 0 0 20px var(--neon-green), 0 0 60px var(--neon-green), 0 0 120px var(--neon-green); }
+}
+
+/* ── Decrypting loader ── */
+@keyframes decrypt {
+  0%   { content: 'DECRYPTING...'; }
+  20%  { content: 'D3CR¥PT!NG...'; }
+  40%  { content: 'D€CRYPT1NG...'; }
+  60%  { content: 'DECRYPTING...'; }
+  80%  { content: 'D3CRYPTING...'; }
+  100% { content: 'DECRYPTING...'; }
+}
+
+/* ── Timer warning states ── */
+.timer-critical {
+  color: var(--neon-red) !important;
+  animation: timerPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes timerPulse {
+  from { text-shadow: 0 0 8px var(--neon-red); }
+  to   { text-shadow: 0 0 24px var(--neon-red), 0 0 48px var(--neon-red); }
+}
+
+/* ── Warning banner ── */
+.warning-banner {
+  background: rgba(255, 0, 51, 0.1);
+  border: 1px solid var(--neon-red);
+  border-left: 4px solid var(--neon-red);
+  animation: warningFlash 0.3s ease infinite alternate;
+}
+
+@keyframes warningFlash {
+  from { background: rgba(255, 0, 51, 0.05); }
+  to   { background: rgba(255, 0, 51, 0.15); }
+}
+
+/* ── Matrix rain ── */
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+}
+
+/* ── Page/question transitions ─ */
+.page-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Status badge ── */
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid currentColor;
+  text-transform: uppercase;
+}
+
+/* ── Corner decorations ── */
+.corner-tl::before { content: '▸'; position: absolute; top: -1px; left: -1px; color: var(--neon-green); font-size: 0.8rem; }
+.corner-br::after  { content: '◂'; position: absolute; bottom: -1px; right: -1px; color: var(--neon-green); font-size: 0.8rem; }
+
+/* ── Boot sequence ── */
+@keyframes bootLine {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.boot-line {
+  animation: bootLine 0.2s ease forwards;
+  opacity: 0;
+}
+
+/* System failure */
+.system-failure {
+  animation: systemFailure 0.1s ease infinite;
+}
+
+@keyframes systemFailure {
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+  25%       { filter: hue-rotate(120deg) brightness(1.2); }
+  50%       { filter: hue-rotate(240deg) brightness(0.8); }
+  75%       { filter: hue-rotate(180deg) brightness(1.1); }
+}

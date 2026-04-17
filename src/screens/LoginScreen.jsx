@@ -203,10 +203,19 @@ export default function LoginScreen() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
           transition={{ delay: 1.5 }}
-          className="text-center text-xs mt-4"
+          className="text-center text-xs mt-4 relative"
           style={{ fontFamily: 'var(--font-mono)', color: 'var(--neon-green)' }}
         >
           ▸ All activity is monitored and recorded ◂
+          
+          <button 
+            type="button"
+            onClick={() => window.location.href = '/admin'}
+            className="absolute right-0 top-0 opacity-20 hover:opacity-100 transition-opacity"
+            title="Access Admin Panel"
+          >
+            [A]
+          </button>
         </motion.p>
       </motion.div>
     </div>

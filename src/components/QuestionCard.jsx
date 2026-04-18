@@ -196,27 +196,29 @@ export default function QuestionCard({ onAnswerSubmit, onNext }) {
                   ◈ CHALLENGE BRIEF
                 </p>
 
-                  <div className="mb-6 text-center shadow-lg">
-                    <img 
-                      src={q.mediaUrl} 
-                      alt="Challenge clue" 
-                      className="max-w-full rounded border border-green-500/30 object-contain mx-auto max-h-[50vh] cursor-zoom-in hover:scale-[1.02] transition-transform"
-                      onClick={() => setIsZoomed(true)}
-                    />
-                    <AnimatePresence>
-                      {isZoomed && (
-                        <motion.div 
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 cursor-zoom-out p-4 md:p-12" 
-                          onClick={() => setIsZoomed(false)}
-                        >
-                          <img src={q.mediaUrl} alt="Challenge clue zoomed" className="w-full h-full object-contain pointer-events-none drop-shadow-[0_0_20px_rgba(0,255,65,0.2)]" />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                  {q.mediaUrl && q.mediaType === 'image' && (
+                    <div className="mb-6 text-center shadow-lg">
+                      <img 
+                        src={q.mediaUrl} 
+                        alt="Challenge clue" 
+                        className="max-w-full rounded border border-green-500/30 object-contain mx-auto max-h-[50vh] cursor-zoom-in hover:scale-[1.02] transition-transform"
+                        onClick={() => setIsZoomed(true)}
+                      />
+                      <AnimatePresence>
+                        {isZoomed && (
+                          <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 cursor-zoom-out p-4 md:p-12" 
+                            onClick={() => setIsZoomed(false)}
+                          >
+                            <img src={q.mediaUrl} alt="Challenge clue zoomed" className="w-full h-full object-contain pointer-events-none drop-shadow-[0_0_20px_rgba(0,255,65,0.2)]" />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )}
                 {q.mediaUrl && q.mediaType === 'video' && (
                   <div className="mb-4">
                     <video src={q.mediaUrl} controls className="max-w-full rounded border border-green-500/30 object-contain max-h-64 mx-auto cursor-pointer" />

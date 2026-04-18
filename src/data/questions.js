@@ -1,6 +1,6 @@
 import imageAsset from '../assets/image.png';
 import videoAsset from '../assets/video.mp4';
-import audioAsset from '../assets/morse (1).mp4';
+import audioAsset from '../assets/morse (1).wav';
 
 // ─── Quiz Questions ───────────────────────────────────────────────────────────
 // Each question reveals one or more letters of the final password: "CYBERBREACH"
@@ -59,12 +59,12 @@ export const QUESTIONS = [
   },
   {
     id: 6,
-    type: 'video',
+    type: 'audio',
     category: 'AUDIO PUZZLE',
     difficulty: 'MEDIUM',
     revealedLetter: 'B',
     question: '⚠ SIGNAL INTERCEPTED ⚠\n\nAn encoded transmission has been captured.\n\nUse the reference below to decode the message:\n\nA = .-     B = -...     C = -.-.     D = -..\nE = .      F = ..-.     G = --.      H = ....\nI = ..     J = .---     K = -.-      L = .-..\nM = --     N = -.       O = ---      P = .--.\nQ = --.-   R = .-.      S = ...      T = -\nU = ..-    V = ...-     W = .--      X = -..-\nY = -.--   Z = --..\n\nDecode the audio signal and identify the word.',
-    mediaType: 'video',
+    mediaType: 'audio',
     mediaUrl: audioAsset,
     answer: 'secure',
   },

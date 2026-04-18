@@ -67,7 +67,7 @@ export default function FinalScreen() {
       </div>
 
       {/* Center content */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-10 max-w-2xl mx-auto w-full">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 py-10 max-w-7xl mx-auto w-full">
 
         {/* Glitch title */}
         <motion.div

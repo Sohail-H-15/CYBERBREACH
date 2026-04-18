@@ -1,6 +1,6 @@
 import imageAsset from '../assets/image.png';
 import videoAsset from '../assets/video.mp4';
-import audioAsset from '../assets/morse (1).wav';
+import audioAsset from '../assets/morse (1).mp4';
 
 // ─── Quiz Questions ───────────────────────────────────────────────────────────
 // Each question reveals one or more letters of the final password: "CYBERBREACH"
@@ -59,12 +59,12 @@ export const QUESTIONS = [
   },
   {
     id: 6,
-    type: 'audio',
+    type: 'video',
     category: 'AUDIO PUZZLE',
     difficulty: 'MEDIUM',
     revealedLetter: 'B',
     question: '⚠ SIGNAL INTERCEPTED ⚠\n\nAn encoded transmission has been captured.\n\nUse the reference below to decode the message:\n\nA = .-     B = -...     C = -.-.     D = -..\nE = .      F = ..-.     G = --.      H = ....\nI = ..     J = .---     K = -.-      L = .-..\nM = --     N = -.       O = ---      P = .--.\nQ = --.-   R = .-.      S = ...      T = -\nU = ..-    V = ...-     W = .--      X = -..-\nY = -.--   Z = --..\n\nDecode the audio signal and identify the word.',
-    mediaType: 'audio',
+    mediaType: 'video',
     mediaUrl: audioAsset,
     answer: 'secure',
   },
@@ -74,7 +74,7 @@ export const QUESTIONS = [
     category: 'SCRIPT PUZZLE',
     difficulty: 'HARD',
     revealedLetter: 'A',
-    question: '⚠ SYSTEM SCRIPT ANALYSIS ⚠\n\nA script was recovered from the compromised system.\n\nAnalyze the logic and determine the output:\n\nword = "dffhvv"\n\nresult = ""\n\nfor c in word:\nresult += chr(ord(c) - 3)\n\nprint(result)',
+    question: '⚠ SYSTEM SCRIPT ANALYSIS ⚠\n\nA script was recovered from the compromised system.\n\nAnalyze the logic and determine the output:\n\nword = "vhfdfv"\n\nresult = ""\n\nfor letter in word:\n    result += (letter shifted -3)\n\n# The final result appears scrambled\n\nprint(result)',
     answer: 'access',
   },
   {
